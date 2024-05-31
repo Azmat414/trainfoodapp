@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <style>body {
+      background-image: url('images/confirmation.png'); /* Update the path to your image */
+      background-size: cover;
+      background-position: center;
+      font-family: 'Arial, sans-serif';
+      color: #333;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+  }
+  
+  .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      animation: fadeInContainer 1.5s ease-in-out;
+  }
+  
+  h1 {
+      margin-bottom: 20px;
+      font-size: 2em;
+  }
+  
+  p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+  }
+  
+  .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 1.2em;
+      text-decoration: none;
+      color: #fff;
+      background-color: #28a745;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .btn-primary {
+      background-color: #007bff;
+  }
+  
+  .btn:hover {
+      background-color: #218838;
+      transform: scale(1.05);
+  }
+  
+  .btn-primary:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+  }
+  
+  .animated-title {
+      animation: slideInFromLeft 1.5s ease-in-out;
+  }
+  
+  .animated-text {
+      animation: fadeInText 2s ease-in-out;
+  }
+  
+  .animated-button {
+      animation: bounceIn 2s ease;
+  }
+  
+  @keyframes fadeInContainer {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes slideInFromLeft {
+      0% { opacity: 0; transform: translateX(-100%); }
+      100% { opacity: 1; transform: translateX(0); }
+  }
+  
+  @keyframes fadeInText {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+  }
+  
+  @keyframes bounceIn {
+      0%, 20%, 40%, 60%, 80%, 100% {
+          -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+          transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+      }
+  
+      0% {
+          opacity: 0;
+          -webkit-transform: scale3d(.3, .3, .3);
+          transform: scale3d(.3, .3, .3);
+      }
+  
+      20% {
+          -webkit-transform: scale3d(1.1, 1.1, 1.1);
+          transform: scale3d(1.1, 1.1, 1.1);
+      }
+  
+      40% {
+          -webkit-transform: scale3d(.9, .9, .9);
+          transform: scale3d(.9, .9, .9);
+      }
+  
+      60% {
+          opacity: 1;
+          -webkit-transform: scale3d(1.03, 1.03, 1.03);
+          transform: scale3d(1.03, 1.03, 1.03);
+      }
+  
+      80% {
+          -webkit-transform: scale3d(.97, .97, .97);
+          transform: scale3d(.97, .97, .97);
+      }
+  
+      100% {
+          opacity: 1;
+          -webkit-transform: scale3d(1, 1, 1);
+          transform: scale3d(1, 1, 1);
+      }
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+      <h1 class="animated-title">Order Confirmation</h1>
+      <p class="animated-text">Your order has been placed successfully. Thank you for your purchase!</p>
+      <a href="/home" class="btn btn-primary animated-button">Back to Home</a>
+  </div>
+  <script src="/public/js/jquery-3.4.1.min.js"></script>
+  <script src="/public/js/custom.js"></script>
+</body>
+</html>

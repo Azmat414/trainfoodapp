@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Your Order</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <style>body {
+        background-image: url('images/review.png'); /* Update the path to your image */
+        background-size: cover;
+        background-position: center;
+        font-family: 'Arial, sans-serif';
+        color: #333;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    
+    .container {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 800px;
+        width: 100%;
+        text-align: left;
+        animation: fadeInContainer 1.5s ease-in-out;
+    }
+    
+    h1, h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 2em;
+    }
+    
+    h2 {
+        font-size: 1.5em;
+        margin-top: 20px;
+    }
+    
+    p {
+        margin: 5px 0;
+        font-size: 1.2em;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        animation: fadeInTable 1.5s ease-in-out;
+    }
+    
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    
+    th {
+        background-color: #f2f2f2;
+    }
+    
+    tfoot th {
+        text-align: right;
+    }
+    
+    button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        font-size: 1.2em;
+        text-align: center;
+        color: #fff;
+        background-color: #28a745;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    
+    button:hover {
+        background-color: #218838;
+        transform: scale(1.05);
+    }
+    
+    .animated-title {
+        animation: slideInFromLeft 1.5s ease-in-out;
+    }
+    
+    .animated-form {
+        animation: fadeInForm 2s ease-in-out;
+    }
+    
+    .animated-button {
+        animation: bounceIn 2s ease;
+    }
+    
+    @keyframes fadeInContainer {
+        0% { opacity: 0; transform: translateY(-20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes slideInFromLeft {
+        0% { opacity: 0; transform: translateX(-100%); }
+        100% { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes fadeInForm {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeInTable {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes bounceIn {
+        0%, 20%, 40%, 60%, 80%, 100% {
+            -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+        }
+    
+        0% {
+            opacity: 0;
+            -webkit-transform: scale3d(.3, .3, .3);
+            transform: scale3d(.3, .3, .3);
+        }
+    
+        20% {
+            -webkit-transform: scale3d(1.1, 1.1, 1.1);
+            transform: scale3d(1.1, 1.1, 1.1);
+        }
+    
+        40% {
+            -webkit-transform: scale3d(.9, .9, .9);
+            transform: scale3d(.9, .9, .9);
+        }
+    
+        60% {
+            opacity: 1;
+            -webkit-transform: scale3d(1.03, 1.03, 1.03);
+            transform: scale3d(1.03, 1.03, 1.03);
+        }
+    
+        80% {
+            -webkit-transform: scale3d(.97, .97, .97);
+            transform: scale3d(.97, .97, .97);
+        }
+    
+        100% {
+            opacity: 1;
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="animated-title">Review Your Order</h1>
+        <form action="/checkout/place-order" method="POST" class="animated-form">
+            <table class="order-summary">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% orders.forEach(order => { %>
+                        <tr>
+                            <td><%= order.itemId %></td>
+                            <td><%= order.quantity %></td>
+                            <td>£<%= order.totalPrice %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="2">Total</th>
+                        <td>£<%= orders.reduce((total, order) => total + order.totalPrice, 0).toFixed(2) %></td>
+                    </tr>
+                </tfoot>
+            </table>
+            <h2>Delivery Details</h2>
+            <p>Name: <%= deliveryDetails.userName %></p>
+            <p>Seat Number: <%= deliveryDetails.seatNumber %></p>
+            <p>Carriage Number: <%= deliveryDetails.carriageNumber %></p>
+            <h2>Payment Method</h2>
+            <p><%= paymentDetails.paymentMethod %></p>
+            <input type="hidden" name="userId" value="<%= userId %>">
+            <input type="hidden" name="orders" value='<%= JSON.stringify(orders) %>'>
+            <input type="hidden" name="deliveryDetails" value='<%= JSON.stringify(deliveryDetails) %>'>
+            <input type="hidden" name="paymentDetails" value='<%= JSON.stringify(paymentDetails) %>'>
+            <button type="submit" class="btn animated-button">Place Order</button>
+        </form>
+    </div>
+    <script src="/public/js/jquery-3.4.1.min.js"></script>
+    <script src="/public/js/custom.js"></script>
+</body>
+</html>

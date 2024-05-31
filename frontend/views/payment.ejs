@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Details</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <style>body {
+        background-image: url('images/payment.png'); /* Update the path to your image */
+        background-size: cover;
+        background-position: center;
+        font-family: 'Arial, sans-serif';
+        color: #333;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+    
+    .container {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        width: 100%;
+        text-align: left;
+        animation: fadeInContainer 1.5s ease-in-out;
+    }
+    
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 2em;
+        animation: slideInFromLeft 1.5s ease-in-out;
+    }
+    
+    label {
+        display: block;
+        margin-top: 10px;
+        font-size: 1.1em;
+    }
+    
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    
+    button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        font-size: 1.2em;
+        text-align: center;
+        color: #fff;
+        background-color: #28a745;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    
+    button:hover {
+        background-color: #218838;
+        transform: scale(1.05);
+    }
+    
+    .animated-title {
+        animation: slideInFromLeft 1.5s ease-in-out;
+    }
+    
+    .animated-form {
+        animation: fadeInForm 2s ease-in-out;
+    }
+    
+    .animated-button {
+        animation: bounceIn 2s ease;
+    }
+    
+    @keyframes fadeInContainer {
+        0% { opacity: 0; transform: translateY(-20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes slideInFromLeft {
+        0% { opacity: 0; transform: translateX(-100%); }
+        100% { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes fadeInForm {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes bounceIn {
+        0%, 20%, 40%, 60%, 80%, 100% {
+            -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+        }
+    
+        0% {
+            opacity: 0;
+            -webkit-transform: scale3d(.3, .3, .3);
+            transform: scale3d(.3, .3, .3);
+        }
+    
+        20% {
+            -webkit-transform: scale3d(1.1, 1.1, 1.1);
+            transform: scale3d(1.1, 1.1, 1.1);
+        }
+    
+        40% {
+            -webkit-transform: scale3d(.9, .9, .9);
+            transform: scale3d(.9, .9, .9);
+        }
+    
+        60% {
+            opacity: 1;
+            -webkit-transform: scale3d(1.03, 1.03, 1.03);
+            transform: scale3d(1.03, 1.03, 1.03);
+        }
+    
+        80% {
+            -webkit-transform: scale3d(.97, .97, .97);
+            transform: scale3d(.97, .97, .97);
+        }
+    
+        100% {
+            opacity: 1;
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+        }
+    }
+    </style>
+</head>
+<body>
+    <body>
+        <div class="container">
+            <h1 class="animated-title">Payment Details</h1>
+            <form action="/payment" method="POST" class="animated-form">
+                <label for="paymentMethod">Payment Method:</label>
+                <select id="paymentMethod" name="paymentMethod" required>
+                    <option value="creditCard">Credit Card</option>
+                    <option value="debitCard">Debit Card</option>
+                    <option value="paypal">PayPal</option>
+                </select>
+                <button type="submit" class="btn animated-button">Next</button>
+            </form>
+        </div>
+        <script src="/public/js/jquery-3.4.1.min.js"></script>
+        <script src="/public/js/custom.js"></script>
+    </body>
+</html>

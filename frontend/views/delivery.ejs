@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Details</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <style>
+        body {
+            background-image: url('images/delivery.png'); /* Update the path to your image */
+            background-size: cover;
+            background-position: center;
+            font-family: 'Arial, sans-serif';
+            color: #333;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            text-align: left;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        
+        label {
+            display: block;
+            margin-top: 10px;
+            font-size: 1.1em;
+        }
+        
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 1.2em;
+            text-align: center;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #218838;
+        }
+        
+        .animated-text {
+            animation: fadeIn 2s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>                
+</head>
+<body>
+    <div class="container">
+        <h1 class="animated-text">Delivery Details</h1>
+        <form action="/delivery" method="POST">
+            <label for="userName">Name:</label>
+            <input type="text" id="userName" name="userName" required>
+            <label for="seatNumber">Seat Number:</label>
+            <input type="text" id="seatNumber" name="seatNumber" required>
+            <label for="carriageNumber">Carriage Number:</label>
+            <input type="text" id="carriageNumber" name="carriageNumber" required>
+            <button type="submit">Next</button>
+        </form>
+    </div>
+    <script src="/public/js/jquery-3.4.1.min.js"></script>
+    <script src="/public/js/custom.js"></script>
+</body>
+</html>

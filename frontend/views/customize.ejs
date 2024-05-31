@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customize Your Pizza</title>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" />
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+  <link href="css/responsive.css" rel="stylesheet" />
+  <script>
+    function calculateTotal() {
+      let sizePrice = document.querySelector('input[name="size"]:checked').dataset.price;
+      sizePrice = parseFloat(sizePrice);
+
+      let toppingsPrice = 0;
+      document.querySelectorAll('input[name="toppings"]:checked').forEach(topping => {
+        toppingsPrice += parseFloat(topping.dataset.price);
+      });
+
+      const totalPrice = sizePrice + toppingsPrice;
+      document.getElementById('totalPrice').innerText = '£' + totalPrice.toFixed(2);
+      document.querySelector('input[name="totalPrice"]').value = totalPrice.toFixed(2);
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+      calculateTotal();
+      document.querySelectorAll('input[name="size"]').forEach(input => {
+        input.addEventListener('change', calculateTotal);
+      });
+      document.querySelectorAll('input[name="toppings"]').forEach(input => {
+        input.addEventListener('change', calculateTotal);
+      });
+    });
+  </script>
+</head>
+<body class="sub_page">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <h1>Customize your <%= pizzaName %></h1>
+        <img src="<%= pizzaImage %>" alt="<%= pizzaName %>" class="pizza-image">
+      </div>
+      <div class="col-md-6">
+        <form action="/customize/order" method="POST">
+          <input type="hidden" name="userId" value="<%= userId %>">
+          <input type="hidden" name="itemId" value="<%= itemId %>">
+          <input type="hidden" id="totalPriceInput" name="totalPrice">
+          <label>Select Your Pizza Size</label>
+          <div>
+            <input type="radio" id="small" name="size" value="small" data-price="10" checked>
+            <label for="small">Small 7" - £10</label>
+            <input type="radio" id="medium" name="size" value="medium" data-price="15">
+            <label for "medium">Medium 10" - £15</label>
+            <input type="radio" id="large" name="size" value="large" data-price="20">
+            <label for="large">Large 12" - £20</label>
+            <input type="radio" id="king" name="size" value="king" data-price="25">
+            <label for="king">King 15" - £25</label>
+          </div>
+          <label>Select Your Pizza Base</label>
+          <div>
+            <input type="radio" id="deepPan" name="base" value="deepPan" checked>
+            <label for="deepPan"><img src="/images/Deep_Pan.png" alt="Deep Pan" style="width:50px; height:auto;"> Deep Pan</label>
+            <input type="radio" id="thinCrust" name="base" value="thinCrust">
+            <label for="thinCrust"><img src="/images/Italian_Thin.png" alt="Italian Thin" style="width:50px; height:auto;"> Italian Thin</label>
+          </div>
+          <label>Select Your Sauce</label>
+          <div>
+            <input type="radio" id="tomatoSauce" name="sauce" value="tomato" checked>
+            <label for="tomatoSauce">Tomato Sauce</label>
+            <input type="radio" id="bbqSauce" name="sauce" value="bbq">
+            <label for="bbqSauce">BBQ Sauce</label>
+            <input type="radio" id="noSauce" name="sauce" value="noSauce">
+            <label for="noSauce">No Sauce</label>
+          </div>
+          <label>Select Toppings:</label>
+          <div>
+            <input type="checkbox" id="mushroom" name="toppings" value="mushroom" data-price="0.70">
+            <label for="mushroom">Fresh Mushrooms (70p)</label>
+            <input type="checkbox" id="tomato" name="toppings" value="tomato" data-price="0.70">
+            <label for="tomato">Fresh Tomato (70p)</label>
+            <input type="checkbox" id="blackOlives" name="toppings" value="blackOlives" data-price="0.70">
+            <label for="blackOlives">Black Olives (70p)</label>
+            <input type="checkbox" id="jalapeno" name="toppings" value="jalapeno" data-price="0.70">
+            <label for="jalapeno">Jalapeno Peppers (70p)</label>
+          </div>
+          <div class="customization-section">
+            <h3>Options</h3>
+            <label for="quantity">Quantity</label>
+            <select class="form-control" id="quantity" name="quantity">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <div class="customization-section">
+            <h3>Notes</h3>
+            <textarea class="form-control" placeholder="Any special requirements?" name="notes"></textarea>
+          </div>
+          <div>
+            <h4>Total Price: <span id="totalPrice"></span></h4>
+          </div>
+          <div class="btn-box">
+            <button type="submit" class="btn btn-primary">Order</button>
+            <button type="reset" class="btn btn-secondary">Reset</button>
+            <button type="button" class="btn btn-secondary" onclick="history.back()">Back</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <footer class="footer_section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 footer-col">
+          <div class="footer_contact">
+            <h4>Contact Us</h4>
+            <div class="contact_link_box">
+              <a href=""><i class="fa fa-map-marker" aria-hidden="true"></i><span>Location: National Rail</span></a>
+              <a href="tel:+447541140568"><i class="fa fa-phone" aria-hidden="true"></i><span>Call +447541140568</span></a>
+              <a href="mailto:azmatkhan7593@gmail.com"><i class="fa fa-envelope" aria-hidden="true"></i><span>azmatkhan7593@gmail.com</span></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 footer-col">
+          <div class="footer_detail">
+            <a href="" class="footer-logo">Train Fast Food</a>
+            <p>Experience the ultimate fast food journey at Train Fast Food. From mouthwatering burgers to crispy fries, our menu offers a delicious selection of quick bites that'll satisfy your hunger on the go. All aboard for flavor and convenience!</p>
+            <div class="footer_social">
+              <a href="https://www.facebook.com/UniversityofWinchester/videos/972662940252917" target="_blank"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+              <a href="https://twitter.com/your_twitter_account" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              <a href="https://www.linkedin.com/in/azmat-9725121b9/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+              <a href="https://www.instagram.com/your_instagram_account" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+              <a href="https://www.pinterest.com/your_pinterest_account" target="_blank"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 footer-col">
+          <h4>Opening Hours</h4>
+          <p>Everyday</p>
+          <p>05.00 Am - 10.00 Pm</p>
+        </div>
+      </div>
+      <div class="footer-info">
+        <p>&copy; <span id="displayYear"></span> All Rights Reserved By <a href="https://www.winchester.ac.uk/">University of Winchester</a><br><br>&copy; <span id="displayYear"></span> Distributed By <a href="https://www.linkedin.com/in/azmat-9725121b9/" target="_blank">Azmat Khan</a></p>
+      </div>
+    </div>
+  </footer>
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+  <script src="js/custom.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+</body>
+</html>
