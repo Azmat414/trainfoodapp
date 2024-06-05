@@ -1,6 +1,6 @@
 # Train Food App
 
-Train Food App is a web application that allows users to customize and order pizzas, book tables, and manage their orders. Users can sign in using Google OAuth and manage their orders seamlessly.
+Train Food App is a web application that allows users to customize and order pizzas, book tables, and manage their orders. Users can sign in using Google OAuth and manage their orders seamlessly. The app is also a Progressive Web Application (PWA), enabling users to download and use it offline.
 
 ## Features
 
@@ -10,6 +10,7 @@ Train Food App is a web application that allows users to customize and order piz
 - Manage orders
 - Review and place orders
 - Delivery details and payment integration
+- PWA functionality for offline use
 
 ## Tech Stack
 
@@ -35,3 +36,5 @@ Train Food App is a web application that allows users to customize and order piz
 
 ```bash
 git clone https://github.com/yourusername/trainfoodapp.git
+you can on your local server on port http://localhost:3000
+
