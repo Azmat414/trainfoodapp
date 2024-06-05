@@ -4,7 +4,7 @@ const path = require('path');
 const passport = require('passport');
 const session = require('express-session');
 const { Strategy: GoogleStrategy } = require('passport-google-oauth20');
-const { getUserById, addUser } = require('./databaseFunctions'); // Import addUser function
+const { getUserById, addUser } = require('./databaseFunctions'); 
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -78,9 +78,11 @@ app.use('/review', reviewRoute);
 app.use('/checkout', checkoutRouter);
 app.use('/confirmation', confirmationRoute);
 
-app.get('/auth/logout', (req, res) => {
-  req.logout(); // Provided by Passport.js
-  res.redirect('/');
+app.get('/auth/logout', (req, res, next) => {
+  req.logout((err) => {
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
 });
 
 
